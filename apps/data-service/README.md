@@ -1,0 +1,1 @@
+- React, TanStack, TRPC 로 구현한 CRUD 앱. 무거운 데이터 처리를 하면 안 된다.

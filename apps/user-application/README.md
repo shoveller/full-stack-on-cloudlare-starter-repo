@@ -1,73 +1,73 @@
-# TanStack React + tRPC + Cloudflare Worker Template
+# TanStack React + tRPC + Cloudflare Worker 템플릿
 
-This template provides a fully integrated setup of TanStack React Router, tRPC, and Cloudflare Workers, allowing you to build full-stack applications that run on the edge.
+이 템플릿은 TanStack React Router, tRPC, Cloudflare Workers가 완벽하게 통합된 설정을 제공하여, 엣지에서 실행되는 풀스택 애플리케이션을 구축할 수 있게 해줍니다.
 
-## Features
+## 기능
 
-- [TanStack Router](https://tanstack.com/router) for type-safe, powerful routing
-- [TanStack Query](https://tanstack.com/query) for data fetching and caching
-- [tRPC](https://trpc.io/) for end-to-end typesafe APIs
-- [Cloudflare Workers](https://workers.cloudflare.com/) for edge computing
-- [Tailwind CSS](https://tailwindcss.com/) for styling
-- [TypeScript](https://www.typescriptlang.org/) for type safety
+- [TanStack Router](https://tanstack.com/router) - 타입 안전하고 강력한 라우팅
+- [TanStack Query](https://tanstack.com/query) - 데이터 가져오기 및 캐싱
+- [tRPC](https://trpc.io/) - 엔드-투-엔드 타입 안전 API
+- [Cloudflare Workers](https://workers.cloudflare.com/) - 엣지 컴퓨팅
+- [Tailwind CSS](https://tailwindcss.com/) - 스타일링
+- [TypeScript](https://www.typescriptlang.org/) - 타입 안전성
 
-## Getting Started
+## 시작하기
 
-### Prerequisites
+### 사전 요구사항
 
-- [Node.js](https://nodejs.org/) (v18 or later)
-- [npm](https://www.npmjs.com/) (v7 or later)
-- [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/install-and-update/) for Cloudflare Workers development
+- [Node.js](https://nodejs.org/) (v18 이상)
+- [npm](https://www.npmjs.com/) (v7 이상)
+- [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/install-and-update/) - Cloudflare Workers 개발용
 
-### Installation
+### 설치
 
-1. Install dependencies:
+1. 의존성 설치:
 
 ```bash
 npm install
 ```
 
-2. Start the development server:
+2. 개발 서버 시작:
 
 ```bash
 npm run dev
 ```
 
-This will start the local development server at http://localhost:3000.
+이렇게 하면 http://localhost:3000 에서 로컬 개발 서버가 시작됩니다.
 
-## Cloudflare Worker Configuration
+## Cloudflare Worker 구성
 
-### Service Bindings and TypeScript
+### 서비스 바인딩 및 TypeScript
 
-This template includes type definitions for Cloudflare Worker bindings. When adding service bindings or other Cloudflare resources, you should:
+이 템플릿에는 Cloudflare Worker 바인딩에 대한 타입 정의가 포함되어 있습니다. 서비스 바인딩이나 다른 Cloudflare 리소스를 추가할 때 다음을 수행해야 합니다:
 
-1. Generate TypeScript types for your bindings:
+1. 바인딩에 대한 TypeScript 타입 생성:
 
 ```bash
 npm run cf-typegen
 ```
 
-This will create or update typings for your Cloudflare Worker environment.
+이 명령어는 Cloudflare Worker 환경에 대한 타이핑을 생성하거나 업데이트합니다.
 
-2. Update the `Service Bindings` interface in `service-bindings.d.ts`:
+2. `service-bindings.d.ts` 파일의 `Service Bindings` 인터페이스 업데이트:
 
 ```typescript
 interface ServiceBindings extends Env {
-  // You can add Additional typesame bindings here
+  // 여기에 추가적인 타입 바인딩을 추가할 수 있습니다
 }
 ```
 
-3. Use the typed bindings in your tRPC context and procedures:
+3. tRPC 컨텍스트 및 프로시저에서 타입이 지정된 바인딩 사용:
 
 ```typescript
-// In context.ts
+// context.ts에서
 export async function createContext({
   req,
   env,
   workerCtx,
 }: {
   req: Request;
-  env: ServiceBindings; // This will include your typed bindings
+  env: ServiceBindings; // 타입이 지정된 바인딩이 포함됩니다
   workerCtx: ExecutionContext;
 }) {
   return {
@@ -77,66 +77,65 @@ export async function createContext({
   };
 }
 
-// In your tRPC procedures
+// tRPC 프로시저에서
 export const myProcedure = t.procedure
   .query(({ ctx }) => {
-    // Access typed bindings
+    // 타입이 지정된 바인딩에 접근
     const value = await ctx.env.MY_KV.get('some-key');
     return { value };
   });
 ```
 
-## Deployment
+## 배포
 
-To deploy your application to Cloudflare Workers:
+애플리케이션을 Cloudflare Workers에 배포하려면:
 
-1. Build the application:
+1. 애플리케이션 빌드:
 
 ```bash
 npm run build
 ```
 
-2. Deploy to Cloudflare:
+2. Cloudflare에 배포:
 
 ```bash
 npm run deploy
 ```
 
+이렇게 하면 애플리케이션이 Cloudflare Workers 계정에 배포됩니다. Wrangler가 Cloudflare 계정 자격 증명으로 구성되어 있는지 확인하십시오.
 
-This will deploy your application to your Cloudflare Workers account. Make sure you have configured Wrangler with your Cloudflare account credentials.
+### 구성
 
-### Configuration
+`wrangler.toml` 파일을 편집하여 Cloudflare Worker 배포를 사용자 정의할 수 있습니다. 주요 구성은 다음과 같습니다:
 
-You can customize your Cloudflare Worker deployment by editing the `wrangler.toml` file. Key configurations include:
+- `name`: 워커의 이름
+- `compatibility_date`: Cloudflare Workers 호환성 날짜
+- `routes`: 워커에 대한 URL 패턴 매칭
+- `site`: 정적 자산 제공을 위한 구성
 
-- `name`: The name of your worker
-- `compatibility_date`: The Cloudflare Workers compatibility date
-- `routes`: URL pattern matching for your worker
-- `site`: Configuration for serving static assets
-
-## Project Structure
+## 프로젝트 구조
 
 ```
-├── src/                  # Frontend React application
-│   ├── routes/           # TanStack router routes
-│   ├── trpcClient.ts     # tRPC client setup
-│   └── main.tsx          # Application entry point
+├── src/                  # 프론트엔드 React 애플리케이션
+│   ├── routes/           # TanStack 라우터 경로
+│   ├── trpcClient.ts     # tRPC 클라이언트 설정
+│   └── main.tsx          # 애플리케이션 진입점
 │
-├── worker/               # Cloudflare Worker backend
-│   ├── index.ts          # Worker entry point
-│   └── trpc/             # tRPC router and procedures
-│       ├── context.ts    # tRPC context creation
-│       ├── router.ts     # Main tRPC router
-│       └── routers/      # Individual tRPC route handlers
+├── worker/               # Cloudflare Worker 백엔드
+│   ├── index.ts          # 워커 진입점
+│   └── trpc/             # tRPC 라우터 및 프로시저
+│       ├── context.ts    # tRPC 컨텍스트 생성
+│       ├── router.ts     # 메인 tRPC 라우터
+│       └── routers/      # 개별 tRPC 라우트 핸들러
 │
-├── public/               # Static assets
-└── wrangler.toml         # Cloudflare Worker configuration
+├── public/               # 정적 자산
+└── wrangler.toml         # Cloudflare Worker 구성
 ```
 
-## Additional Resources
+## 추가 자료
 
-- [TanStack Router Documentation](https://tanstack.com/router/latest/docs/overview)
-- [TanStack Query Documentation](https://tanstack.com/query/latest/docs/react/overview)
-- [tRPC Documentation](https://trpc.io/docs)
-- [Cloudflare Workers Documentation](https://developers.cloudflare.com/workers/)
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [TanStack Router 문서](https://tanstack.com/router/latest/docs/overview)
+- [TanStack Query 문서](https://tanstack.com/query/latest/docs/react/overview)
+- [tRPC 문서](https://trpc.io/docs)
+- [Cloudflare Workers 문서](https://developers.cloudflare.com/workers/)
+- [Tailwind CSS 문서](https://tailwindcss.com/docs)
