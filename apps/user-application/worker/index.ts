@@ -5,6 +5,7 @@ import { createContext } from "./trpc/context";
 export default {
   fetch(request, env, ctx) {
     const url = new URL(request.url);
+    env.CACHE.put('key', url.toString())
 
     if (url.pathname.startsWith("/trpc")) {
       return fetchRequestHandler({
