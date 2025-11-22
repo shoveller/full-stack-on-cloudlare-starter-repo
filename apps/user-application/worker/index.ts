@@ -1,5 +1,5 @@
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
-import { appRouter } from "./trpc/router";
+import { appRouter } from "./trpc/routers";
 import { createContext } from "./trpc/context";
 import { initDatabase } from '@repo/data-ops/database'
 
