@@ -1,5 +1,15 @@
 import { z } from "zod";
 
+/*
+아래와 같은 구조의 스키마 객체를 허용한다
+{
+  "default": "https://example.com",
+  "ko": "https://example.kr",
+  "en": "https://example.com/en",
+  "jp": "https://example.jp"
+  // ... 임의의 키 추가 가능
+}
+ */
 export const destinationsSchema = z.preprocess(
   (obj) => {
     if (typeof obj === "string") {
