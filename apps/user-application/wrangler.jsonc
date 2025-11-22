@@ -14,13 +14,6 @@
   "observability": {
     "enabled": true
   },
-  "secrets_store_secrets": [
-    {
-      "binding": "APIKEY",
-      "secret_name": "STORE_TEST",
-      "store_id": "71762f84ca054fc4a08fd4d8ba70ff7a"
-    }
-  ],
   "kv_namespaces": [
     {
       "binding": "CACHE",

@@ -11,7 +11,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { DestinationsSchemaType } from "@repo/data-ops/zod-schema/links";
+import { DestinationsSchemaType } from "@repo/data-ops/zod/links";
 import { Globe } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
 import { queryClient, trpc } from "@/router";

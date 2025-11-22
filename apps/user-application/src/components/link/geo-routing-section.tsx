@@ -2,7 +2,7 @@ import { MapPin } from "lucide-react";
 import { GeographicDestinationsList } from "./geographic-destinations-list";
 import { AddDestinationForm } from "./add-destination-form";
 
-import { DestinationsSchemaType } from "@repo/data-ops/zod-schema/links";
+import { DestinationsSchemaType } from "@repo/data-ops/zod/links";
 
 interface GeoRoutingSectionProps {
   destinations: DestinationsSchemaType;

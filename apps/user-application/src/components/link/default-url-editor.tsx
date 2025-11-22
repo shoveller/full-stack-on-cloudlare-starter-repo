@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Edit3, Check } from "lucide-react";
-import { DestinationsSchemaType } from "@repo/data-ops/zod-schema/links";
+import { DestinationsSchemaType } from "@repo/data-ops/zod/links";
 import { trpc } from "@/router";
 import { useMutation } from "@tanstack/react-query";
 

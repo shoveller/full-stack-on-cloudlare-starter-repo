@@ -1,4 +1,4 @@
-import { DurableObjectGeoClickSchemaType } from "@repo/data-ops/zod-schema/links";
+import { DurableObjectGeoClickSchemaType } from "@repo/data-ops/zod/links";
 import { create } from "zustand";
 
 type GeoClickStore = {

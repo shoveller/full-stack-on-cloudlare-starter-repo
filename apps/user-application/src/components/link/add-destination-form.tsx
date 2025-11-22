@@ -18,7 +18,7 @@ import {
 import { Plus, Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import iso31661 from "iso-3166-1";
-import { DestinationsSchemaType } from "@repo/data-ops/zod-schema/links";
+import { DestinationsSchemaType } from "@repo/data-ops/zod/links";
 import { queryClient, trpc } from "@/router";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
