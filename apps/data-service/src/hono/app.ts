@@ -1,13 +1,12 @@
-import { getLink } from "@repo/data-ops/queries/links";
 import { cloudflareInfoSchema } from "@repo/data-ops/zod/links";
 import {Hono} from "hono";
-import {getDestinationForCountry} from "@/helpers/route-ops";
+import {getDestinationForCountry, getRoutingDestinations} from "@/helpers/route-ops";
 
 export const App = new Hono<{ Bindings: Env }>()
 
 App.get('/:linkId', async (c) => {
 	const linkId = c.req.param('linkId')
-	const linkInfo = await getLink(linkId)
+	const linkInfo = await getRoutingDestinations(c.env, linkId)
 	if (!linkInfo) {
 		return c.text('목적지가 없습니다.', 404)
 	}

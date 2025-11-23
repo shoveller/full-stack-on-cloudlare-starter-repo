@@ -13,19 +13,18 @@
 	"observability": {
 		"enabled": true
 	},
+	"kv_namespaces": [
+		{
+			"binding": "CACHE",
+			"id": "62aa1dc6d25b46e7b0328a1aaf499372",
+			"remote": true
+		}
+	],
 	"d1_databases": [
 		{
 			"binding": "DB",
 			"database_id": "78f5fe59-e83b-430f-a873-35bf26f2f320",
 			"remote": true
 		}
-	],
-	"queues": {
-		"producers": [],
-		"consumers": [
-			{
-				"queue": "link-clicks"
-			}
-		]
-	}
+	]
 }
