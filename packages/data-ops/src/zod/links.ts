@@ -42,6 +42,7 @@ export const createLinkSchema = linkSchema.omit({
   linkId: true,
 });
 
+// 클라우드플레어 raw 데이터를 추상화한 스키마
 export const cloudflareInfoSchema = z.object({
   country: z.string().optional(),
   latitude: z
