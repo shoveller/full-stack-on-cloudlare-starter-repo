@@ -7,12 +7,25 @@
 	"name": "data-service",
 	"main": "src/index.ts",
 	"compatibility_date": "2025-06-17",
-	"compatibility_flags": ["nodejs_compat"],
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
 	"observability": {
 		"enabled": true
 	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_id": "78f5fe59-e83b-430f-a873-35bf26f2f320",
+			"remote": true
+		}
+	],
 	"queues": {
 		"producers": [],
-		"consumers": [{ "queue": "link-clicks" }]
+		"consumers": [
+			{
+				"queue": "link-clicks"
+			}
+		]
 	}
 }
