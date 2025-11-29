@@ -9,13 +9,13 @@ export const App = new Hono<{
 }>()
 
 App.all('/trpc/*', (c) => {
-    const userId = c.get('userId')
+    const userId = c.get('userId') || "demo-user"
 
     return fetchRequestHandler({
         endpoint: "/trpc",
         req: c.req.raw,
         router: appRouter,
         createContext: () =>
-          createContext({req: c.req.raw, env: c.env, workerCtx: c.executionCtx, { userId }}),
+          createContext({req: c.req.raw, env: c.env, workerCtx: c.executionCtx, userInfo: { userId }}),
     });
 })
