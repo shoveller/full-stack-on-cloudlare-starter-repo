@@ -3,6 +3,7 @@ import { appRouter } from "./trpc/routers";
 import { createContext } from "./trpc/context";
 import { initDatabase } from '@repo/data-ops/database'
 import { WorkerEntrypoint } from 'cloudflare:workers';
+import {App} from "@/worker/hono/app.ts";
 
 export default class extends WorkerEntrypoint<Env> {
     constructor(ctx: ExecutionContext, env: Env) {
@@ -10,35 +11,6 @@ export default class extends WorkerEntrypoint<Env> {
         initDatabase(env.DB)
     }
     fetch(request: Request) {
-        const url = new URL(request.url);
-
-        if (url.pathname.startsWith("/trpc")) {
-            return fetchRequestHandler({
-                endpoint: "/trpc",
-                req: request,
-                router: appRouter,
-                createContext: () =>
-                    createContext({ req: request, env: this.env, workerCtx: this.ctx }),
-            });
-        }
-        return this.env.ASSETS.fetch(request);
+        return App.fetch(request, this.env, this.ctx, { userId, '12345' })
     }
 }
-
-// export default {
-//   fetch(request, env, ctx) {
-//     initDatabase(env.DB)
-//     const url = new URL(request.url);
-//
-//     if (url.pathname.startsWith("/trpc")) {
-//       return fetchRequestHandler({
-//         endpoint: "/trpc",
-//         req: request,
-//         router: appRouter,
-//         createContext: () =>
-//           createContext({ req: request, env: env, workerCtx: ctx }),
-//       });
-//     }
-//     return env.ASSETS.fetch(request);
-//   },
-// } satisfies ExportedHandler<ServiceBindings>;
