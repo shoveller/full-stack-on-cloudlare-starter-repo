@@ -8,14 +8,14 @@
     "migrate": "drizzle-kit migrate --config drizzle.config.ts",
     "generate": "drizzle-kit generate --config drizzle.config.ts",
     "studio": "drizzle-kit studio --config drizzle.config.ts",
-    "better-auth-generate": "pnpx @better-auth/cli generate --config auth-gen/auth.ts --output=src/drizzle-out/auth-schema.ts"
+    "better-auth-generate": "pnpx @better-auth/cli generate --config src/auth/gen-auth.ts --output=src/drizzle-out/auth-schema.ts"
   },
   "exports": {
     "./database": "./dist/db/database.js",
     "./queries/*": "./dist/queries/*.js",
     "./zod/*": "./dist/zod/*.js",
     "./durable-objects-helpers/*": "./dist/durable-objects-helpers/*.js",
-    "./auth": "./dist/src/auth.js"
+    "./auth/*": "./dist/auth/*.js"
   },
   "keywords": [],
   "author": "",

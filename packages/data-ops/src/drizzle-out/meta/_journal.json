@@ -8,6 +8,20 @@
       "when": 1764387716742,
       "tag": "0000_jittery_punisher",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1764420317106,
+      "tag": "0001_damp_dark_beast",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1764423810183,
+      "tag": "0002_fuzzy_mariko_yashida",
+      "breakpoints": true
     }
   ]
 }
