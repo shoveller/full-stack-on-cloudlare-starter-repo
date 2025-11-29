@@ -8,14 +8,14 @@
     "migrate": "drizzle-kit migrate --config drizzle.config.ts",
     "generate": "drizzle-kit generate --config drizzle.config.ts",
     "studio": "drizzle-kit studio --config drizzle.config.ts",
-    "better-auth-generate": "npx @better-auth/cli generate --config auth-gen/auth.ts"
+    "better-auth-generate": "pnpx @better-auth/cli generate --config auth-gen/auth.ts --output=src/drizzle-out/auth-schema.ts"
   },
   "exports": {
     "./database": "./dist/db/database.js",
     "./queries/*": "./dist/queries/*.js",
     "./zod/*": "./dist/zod/*.js",
     "./durable-objects-helpers/*": "./dist/durable-objects-helpers/*.js",
-    "./auth": "./dist/better-auth/auth.js"
+    "./auth": "./dist/src/auth.js"
   },
   "keywords": [],
   "author": "",
@@ -23,18 +23,19 @@
   "dependencies": {
     "@better-auth/stripe": "1.3.4",
     "better-auth": "1.3.4",
-    "better-sqlite3": "^12.2.0",
     "drizzle-orm": "^0.44.2",
     "kysely": "^0.28.2",
     "kysely-d1": "^0.4.0",
     "nanoid": "^5.1.5",
     "stripe": "^18.4.0",
     "uuid": "^11.1.0",
-    "zod": "^3.25.67"
+    "zod": "^4.1.13"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250405.0",
+    "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^22.15.19",
+    "better-sqlite3": "^12.2.0",
     "drizzle-kit": "^0.31.1",
     "tsc-alias": "^1.8.16",
     "wrangler": "^4.22.0"
