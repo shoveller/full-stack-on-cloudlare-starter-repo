@@ -4,13 +4,14 @@
  */
 {
   "$schema": "node_modules/wrangler/config-schema.json",
+  "account_id": "05d28f4d9bcd9c4b42a42c06420cb464",
   "name": "user-application",
   "main": "worker/index.ts",
   "compatibility_date": "2025-06-17",
   "assets": {
     "binding": "ASSETS",
     "not_found_handling": "single-page-application",
-    "run_worker_first":  ["/trpc/*"]
+    "run_worker_first": ["/api/auth/*", "/trpc/*", "/click-socket"]
   },
   "observability": {
     "enabled": true
@@ -27,6 +28,7 @@
       "d1_databases": [
         {
           "binding": "DB",
+          "database_name": "smart-links-stage",
           "database_id": "78f5fe59-e83b-430f-a873-35bf26f2f320",
           "migrations_dir": "../../packages/data-ops/src/drizzle-out",
           "remote": true
@@ -43,8 +45,10 @@
   "d1_databases": [
     {
       "binding": "DB",
+      "database_name": "smart-links-stage",
       "database_id": "78f5fe59-e83b-430f-a873-35bf26f2f320",
-      "migrations_dir": "../../packages/data-ops/src/drizzle-out"
+      "migrations_dir": "../../packages/data-ops/src/drizzle-out",
+      "remote": true
     }
   ]
 }

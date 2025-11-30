@@ -11,3 +11,4 @@ export default class extends WorkerEntrypoint<Env> {
         return App.fetch(request, this.env, this.ctx)
     }
 }
+
