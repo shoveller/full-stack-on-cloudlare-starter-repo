@@ -1,21 +1,24 @@
-// TODO: 이 추상계층은 왜 만든거지?
-export async function createContext({
-  req,
-  env,
-  workerCtx,
-  userInfo
-}: {
-  req: Request;
-  env: ServiceBindings;
-  workerCtx: ExecutionContext;
-  userInfo: { userId: string }
-}) {
-  return {
+// 인증정보 컨텍스트 생성함수
+export async function createAuthContext({
     req,
     env,
     workerCtx,
-    userInfo,
-  };
+    userId
+}: {
+    req: Request;
+    env: ServiceBindings;
+    workerCtx: ExecutionContext;
+    userId: string
+}) {
+    return {
+        req,
+        env,
+        workerCtx,
+        userInfo: {
+            userId,
+        },
+    };
 }
 
-export type Context = Awaited<ReturnType<typeof createContext>>;
+// 파일을 분리해서 이 타입의 순환참조를 막는다.
+export type AuthContext = Awaited<ReturnType<typeof createAuthContext>>;
